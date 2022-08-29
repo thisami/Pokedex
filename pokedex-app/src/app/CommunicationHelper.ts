@@ -3,6 +3,9 @@ import { GenerationInformation } from "src/Entities/GenerationInformation";
 import { Pokemon } from "src/Entities/Pokemon";
 export class CommunicationHelper {
     public getGeneration(id: number, http: HttpClient): Promise<Pokemon[]> {
+        //Step 0.5: Damit ein Aufrufer korrekt mit der Asynchronität des API-Calls umgeht wird hier 
+        //ein Promise zurückgegeben. Ist die Asychronität abgeschlossen wird dem Aufrufer mittels
+        // resolve mitgeteilt, dass die Asynchronität abgeschlossen ist.
         return new Promise((resolve, reject) => {
             const pokemonFromGeneration: Pokemon[] = [];
             //Step 1: Aufruf der API (asynchron)
