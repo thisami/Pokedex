@@ -1,4 +1,13 @@
 .mat-toolbar.mat-primary {
-    background: #ff00bf;
+    background: #1100ff;
     color: rgb(247, 241, 241);
+}
+
+.example-card {
+    max-width: 400px;
+}
+
+.example-header-image {
+    /* Profilbild oben links background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');*/
+    background-size: cover;
 }

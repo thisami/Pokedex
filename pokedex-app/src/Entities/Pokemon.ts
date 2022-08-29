@@ -1,5 +1,5 @@
 export class Pokemon {
-    constructor(readonly name: string, readonly url: string) {
+    constructor(public name: string, public url: string, public picture: HTMLImageElement) {
 
     }
 }

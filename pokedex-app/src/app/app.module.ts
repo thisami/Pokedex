@@ -6,7 +6,8 @@ import { AppComponent } from './app.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MatCardModule } from '@angular/material/card';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
 
   imports: [
+    FlexLayoutModule,
+    MatCardModule,
     HttpClientModule,
     MatToolbarModule,
     MatIconModule,

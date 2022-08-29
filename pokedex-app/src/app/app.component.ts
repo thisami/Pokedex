@@ -9,13 +9,24 @@ import { Pokemon } from 'src/Entities/Pokemon';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   title = 'pokedex';
+  public pokemon: Pokemon[] = [];
   constructor(private http: HttpClient) { }
 
+  // "picture" in getGeneration rein?
   getGeneration(id: number) {
+    this.pokemon.splice(0)
     const comHelper = new CommunicationHelper()
     comHelper.getGeneration(id, this.http).then((pokemon: Pokemon[]) => {
       console.log(pokemon);
+      pokemon.forEach(element => {
+
+        this.pokemon.push(element)
+      })
+
+
+
     }).catch(() => {
       console.error("Irgendwas ging daneben...");
     })
@@ -25,3 +36,4 @@ export class AppComponent {
 
 
 }
+

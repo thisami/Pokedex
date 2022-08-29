@@ -19,3 +19,17 @@
     </mat-menu>
   </mat-toolbar>
 </p>
+<div fxLayout="row wrap" fxLayoutGap="16px">
+  <div fxFlex="20%" *ngFor="let pokemon of pokemon">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title>{{pokemon.name}}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image
+        src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{getGeneration(id)}}.png"
+        alt="Photo of {{pokemon.name}}">
+      <!--getGeneration(id) falsch???-->
+    </mat-card>
+  </div>
+</div>
