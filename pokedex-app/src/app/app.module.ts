@@ -4,7 +4,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { AppComponent } from './app.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
-
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
 
   imports: [
+    HttpClientModule,
     MatToolbarModule,
     MatIconModule,
     MatMenuModule,

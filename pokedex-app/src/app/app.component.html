@@ -6,18 +6,16 @@
       <mat-icon>more_vert</mat-icon>
     </button>
 
-
-
     <span> Pokedex</span>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item>Generation 1</button>
-      <button mat-menu-item>Generation 2</button>
-      <button mat-menu-item>Generation 3</button>
-      <button mat-menu-item>Generation 4</button>
-      <button mat-menu-item>Generation 5</button>
-      <button mat-menu-item>Generation 6</button>
-      <button mat-menu-item>Generation 7</button>
-      <button mat-menu-item>Generation 8</button>
+      <button (click)="getGeneration(1)" mat-menu-item>Generation 1</button>
+      <button (click)="getGeneration(2)" mat-menu-item>Generation 2</button>
+      <button (click)="getGeneration(3)" mat-menu-item>Generation 3</button>
+      <button (click)="getGeneration(4)" mat-menu-item>Generation 4</button>
+      <button (click)="getGeneration(5)" mat-menu-item>Generation 5</button>
+      <button (click)="getGeneration(6)" mat-menu-item>Generation 6</button>
+      <button (click)="getGeneration(7)" mat-menu-item>Generation 7</button>
+      <button (click)="getGeneration(8)" mat-menu-item>Generation 8</button>
     </mat-menu>
   </mat-toolbar>
 </p>

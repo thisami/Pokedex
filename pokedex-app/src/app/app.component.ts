@@ -1,5 +1,6 @@
-import { Component, ViewChild } from '@angular/core';
-
+import { Component } from '@angular/core';
+import { CommunicationHelper } from './CommunicationHelper';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,14 @@ import { Component, ViewChild } from '@angular/core';
 })
 export class AppComponent {
   title = 'pokedex';
-  shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
+  constructor(private http: HttpClient) {
+
+  }
+  getGeneration(id: number) {
+    const comHelper = new CommunicationHelper()
+    comHelper.getGeneration(id, this.http)
+  }
+
 }
 
 
