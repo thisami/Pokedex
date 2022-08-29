@@ -30,7 +30,7 @@ export class CommunicationHelper {
                 });
                 resolve(pokemonFromGeneration);
             })
-            //muss das (unten) in die Schleife (oben)???
+            //muss das (unten) in pokemonInGeneration (oben)???
             http.get<any>(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`).subscribe((data: any) => {
                 const pokemonInGeneration: GenerationInformation[] = data.pokemon_sprites;//_sprites???
                 pokemonInGeneration.forEach((pokemonFromApi: any) => {
@@ -39,6 +39,7 @@ export class CommunicationHelper {
                     const newPokemon = new Pokemon(pokemonFromApi.name, pokemonFromApi.url, pokemonFromApi.picture);
                     pokemonFromGeneration.push(newPokemon);
                 });
+                //bis hier geht unten :)
             })
         })
 
