@@ -20,7 +20,7 @@
 
 .example-card {
     width: 25%;
-    height: 300px;
+    height: 100%;
     margin-left: 20px;
     margin-right: 20px;
     margin-top: 20px;
@@ -40,8 +40,8 @@
 
 .img {
 
-    width: 230px;
-    height: 230px;
+    width: 57%;
+    height: 66%;
     margin: auto;
     align-self: center;
     align-items: center;
