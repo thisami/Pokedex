@@ -21,8 +21,11 @@ export class AppComponent {
     comHelper.getGeneration(id, this.http).then((pokemon: Pokemon[]) => {
       pokemon.forEach(element => {
         this.pokemon.push(element)
-        console.log(this.pokemon);
       })
+
+      this.pokemon.sort(function (a, b) {
+        return a.pokeId - b.pokeId;
+      });
 
 
     }).catch(() => {

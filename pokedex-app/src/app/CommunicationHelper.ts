@@ -22,32 +22,38 @@ export class CommunicationHelper {
                 let imageReceived: number = 0;
                 pokemonInGeneration.forEach((pokemonFromApi: any) => {
                     const pokemonNameInUppercase = pokemonFromApi.name.charAt(0).toUpperCase() + pokemonFromApi.name.slice(1)
-                    this.getImage(pokemonFromApi.url, http).then((imageString: string) => {
-                        const newPokemon = new Pokemon(1, pokemonNameInUppercase, pokemonFromApi.url, imageString);
-                        pokemonFromGeneration.push(newPokemon);
 
-                        imageReceived = imageReceived + 1;
+                    this.getId(pokemonFromApi.url, http).then((id: number) => {
+                        this.getImage(id, http).then((imageString: string) => {
+                            const newPokemon = new Pokemon(id, pokemonNameInUppercase, pokemonFromApi.url, imageString);
+                            pokemonFromGeneration.push(newPokemon);
 
-                        if (imageReceived == pokemonInGeneration.length)
-                            resolve(pokemonFromGeneration);
+                            imageReceived = imageReceived + 1;
 
+                            if (imageReceived == pokemonInGeneration.length)
+                                resolve(pokemonFromGeneration);
+                        })
                     })
                 });
             })
         })
     }
 
-
-    private getImage(url: string, http: HttpClient): Promise<string> {
-        //1) anhand der URL einen weiteren API-Call machen -> Dort steht die korrekte ID des Pokemon
+    private getId(url: string, http: HttpClient): Promise<number> {
         return new Promise((resolve, reject) => {
             http.get<any>(url).subscribe((data: any) => {
-                //2) Anhand der ID einen dritten API-Call machen -> https://pokeapi.co/api/v2/pokemon/
-                http.get<any>(`https://pokeapi.co/api/v2/pokemon/${data.id}/`).subscribe((data: any) => {
-                    resolve(data.sprites.front_default);
-                })
+                resolve(data.id);
             })
         })
     }
 
+    private getImage(id: number, http: HttpClient): Promise<string> {
+        //1) anhand der URL einen weiteren API-Call machen -> Dort steht die korrekte ID des Pokemon
+        return new Promise((resolve, reject) => {
+            //2) Anhand der ID einen dritten API-Call machen -> https://pokeapi.co/api/v2/pokemon/
+            http.get<any>(`https://pokeapi.co/api/v2/pokemon/${id}/`).subscribe((data: any) => {
+                resolve(data.sprites.front_default);
+            })
+        })
+    }
 }
