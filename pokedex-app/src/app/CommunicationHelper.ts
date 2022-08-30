@@ -52,7 +52,7 @@ export class CommunicationHelper {
         return new Promise((resolve, reject) => {
             //2) Anhand der ID einen dritten API-Call machen -> https://pokeapi.co/api/v2/pokemon/
             http.get<any>(`https://pokeapi.co/api/v2/pokemon/${id}/`).subscribe((data: any) => {
-                resolve(data.sprites.front_default);
+                resolve(data.sprites.other.home.front_default);
             })
         })
     }

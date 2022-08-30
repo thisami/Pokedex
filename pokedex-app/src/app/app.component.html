@@ -1,4 +1,4 @@
-<p>
+<body class="body">
 
   <mat-toolbar color="primary">
 
@@ -18,18 +18,28 @@
       <button (click)="getGeneration(8)" mat-menu-item>Generation 8</button>
     </mat-menu>
   </mat-toolbar>
-</p>
-<div class="container" fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="2%">
-  <div fxFlex="16%" *ngFor="let pokemon of pokemon">
-    <mat-card class="example-card">
-      <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>{{pokemon.name}}</mat-card-title>
+
+  <div class="cardContainer">
+
+    <mat-card class="example-card" *ngFor="let pokemon of pokemon">
+
+      <mat-card-header class="cardHeader">
+        <mat-card-title class="cardTitel">{{pokemon.name}}</mat-card-title>
+        <mat-card-subtitle></mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image src="{{pokemon.image}}" alt="Photo of {{pokemon.name}}">
-      <!--src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{getGeneration(id)}}.png"
-      getGeneration(id) falsch 
-      getGeneration falsch, so wird nur die Generation und nicht das Pokemon geholt-->
+      <img class="img" mat-card-image src="{{pokemon.image}}" alt="Photo of a {{pokemon.name}}">
+      <br>
+      <mat-card-content>
+        <p>
+          Photo of a {{pokemon.name}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+
+      </mat-card-actions>
+
+
     </mat-card>
+
   </div>
-</div>
+</body>
