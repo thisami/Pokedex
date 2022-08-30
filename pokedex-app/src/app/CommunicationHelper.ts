@@ -20,30 +20,43 @@ export class CommunicationHelper {
 
 
                 //Step 3) Über die Informationen iterrieren
+                let imageReceived: number = 0;
                 pokemonInGeneration.forEach((pokemonFromApi: any) => {
-
                     const pokemonNameInUppercase = pokemonFromApi.name.charAt(0).toUpperCase() + pokemonFromApi.name.slice(1)
+                    this.getImage(pokemonFromApi.url, http).then((imageString: string) => {
+                        const newPokemon = new Pokemon(pokemonNameInUppercase, pokemonFromApi.url, imageString);
+                        pokemonFromGeneration.push(newPokemon);
 
-                    //Step 4) Aus den Daten, die von der API kommen, tatsächliche Pokemon machen
-                    const newPokemon = new Pokemon(pokemonNameInUppercase, pokemonFromApi.url, pokemonFromApi.picture);
-                    pokemonFromGeneration.push(newPokemon);
+                        imageReceived = imageReceived + 1;
+
+                        if (imageReceived == pokemonInGeneration.length)
+                            resolve(pokemonFromGeneration);
+
+                    })
                 });
-                resolve(pokemonFromGeneration);
-            })
-            //muss das (unten) in pokemonInGeneration (oben)???
-            http.get<any>(`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`).subscribe((data: any) => {
-                const pokemonInGeneration: GenerationInformation[] = data.pokemon_sprites;//_sprites???
-                pokemonInGeneration.forEach((pokemonFromApi: any) => {
 
-
-                    const newPokemon = new Pokemon(pokemonFromApi.name, pokemonFromApi.url, pokemonFromApi.picture);
-                    pokemonFromGeneration.push(newPokemon);
-                });
-                //bis hier geht unten :)
             })
         })
-
-
-
     }
+
+
+    private getImage(url: string, http: HttpClient): Promise<string> {
+
+        //1) anhand der URL einen weiteren API-Call machen -> Dort steht die korrekte ID des Pokemon
+
+        return new Promise((resolve, reject) => {
+            http.get<any>(url).subscribe((data: any) => {
+                //2) Anhand der ID einen dritten API-Call machen -> https://pokeapi.co/api/v2/pokemon/
+                http.get<any>(`https://pokeapi.co/api/v2/pokemon/${data.id}/`).subscribe((data: any) => {
+                    fetch(data.sprites.front_default)
+                        .then(res => {
+                            return res.blob()
+                        }).then(blob => {
+                            resolve(URL.createObjectURL(blob))
+                        })
+                })
+            })
+        })
+    }
+
 }

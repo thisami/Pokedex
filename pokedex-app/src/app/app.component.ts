@@ -19,21 +19,14 @@ export class AppComponent {
     this.pokemon.splice(0)
     const comHelper = new CommunicationHelper()
     comHelper.getGeneration(id, this.http).then((pokemon: Pokemon[]) => {
-      console.log(pokemon);
       pokemon.forEach(element => {
-
         this.pokemon.push(element)
+        console.log(this.pokemon);
       })
-
 
 
     }).catch(() => {
       console.error("Irgendwas ging daneben...");
     })
   }
-
-
-
-
 }
-

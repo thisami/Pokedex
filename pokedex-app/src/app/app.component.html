@@ -26,8 +26,7 @@
         <div mat-card-avatar class="example-header-image"></div>
         <mat-card-title>{{pokemon.name}}</mat-card-title>
       </mat-card-header>
-      <img mat-card-image src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
-        alt="Photo of {{pokemon.name}}">
+      <img mat-card-image src="{{pokemon.image}}" alt="Photo of {{pokemon.name}}">
       <!--src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/{{getGeneration(id)}}.png"
       getGeneration(id) falsch 
       getGeneration falsch, so wird nur die Generation und nicht das Pokemon geholt-->
