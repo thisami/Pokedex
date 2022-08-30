@@ -18,13 +18,12 @@ export class CommunicationHelper {
                 //"pokemon_species". Dieses Feld nehmen wir und packen es in einen tatsächlichen Typen   
                 const pokemonInGeneration: GenerationInformation[] = data.pokemon_species;
 
-
                 //Step 3) Über die Informationen iterrieren
                 let imageReceived: number = 0;
                 pokemonInGeneration.forEach((pokemonFromApi: any) => {
                     const pokemonNameInUppercase = pokemonFromApi.name.charAt(0).toUpperCase() + pokemonFromApi.name.slice(1)
                     this.getImage(pokemonFromApi.url, http).then((imageString: string) => {
-                        const newPokemon = new Pokemon(pokemonNameInUppercase, pokemonFromApi.url, imageString);
+                        const newPokemon = new Pokemon(1, pokemonNameInUppercase, pokemonFromApi.url, imageString);
                         pokemonFromGeneration.push(newPokemon);
 
                         imageReceived = imageReceived + 1;
@@ -34,26 +33,18 @@ export class CommunicationHelper {
 
                     })
                 });
-
             })
         })
     }
 
 
     private getImage(url: string, http: HttpClient): Promise<string> {
-
         //1) anhand der URL einen weiteren API-Call machen -> Dort steht die korrekte ID des Pokemon
-
         return new Promise((resolve, reject) => {
             http.get<any>(url).subscribe((data: any) => {
                 //2) Anhand der ID einen dritten API-Call machen -> https://pokeapi.co/api/v2/pokemon/
                 http.get<any>(`https://pokeapi.co/api/v2/pokemon/${data.id}/`).subscribe((data: any) => {
-                    fetch(data.sprites.front_default)
-                        .then(res => {
-                            return res.blob()
-                        }).then(blob => {
-                            resolve(URL.createObjectURL(blob))
-                        })
+                    resolve(data.sprites.front_default);
                 })
             })
         })
