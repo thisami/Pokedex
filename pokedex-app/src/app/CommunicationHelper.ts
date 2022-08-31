@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { GenerationInformation } from "src/Entities/GenerationInformation";
 import { Pokemon } from "src/Entities/Pokemon";
 import { PokemonInformation } from "src/Entities/PokemonInformation";
+import { DamageRelations } from "src/Entities/DamageRelations";
 
 export class CommunicationHelper {
     public getGeneration(id: number, http: HttpClient): Promise<Pokemon[]> {
@@ -70,5 +71,54 @@ export class CommunicationHelper {
             })
         })
     }
-}
+    public getEffectivity(name: string, http: HttpClient): Promise<DamageRelations> { //?Promise<??????>
+        return new Promise((resolve, reject) => {
+            http.get<any>(`https://pokeapi.co/api/v2/type/ground${name}/`).subscribe((data: any) => { //nicht data.id sondern Name von Typ
+                const doubleDamageFrom: string[] = [];
+                data.damage_relations.forEach((element: any) => {
+                    doubleDamageFrom.push(element.double_damage_from.name);
 
+
+
+                });
+                const doubleDamageTo: string[] = [];
+                data.damage_relations.forEach((element: any) => {
+                    doubleDamageTo.push(element.double_damage_to.name);
+
+
+
+                });
+                const halfDamageFrom: string[] = [];
+                data.damage_relations.forEach((element: any) => {
+                    halfDamageFrom.push(element.half_damage_from.name);
+
+
+
+                });
+                const halfDamageTo: string[] = [];
+                data.damage_relations.forEach((element: any) => {
+                    halfDamageTo.push(element.half_damage_to.name);
+
+
+
+                });
+                const noDamageFrom: string[] = [];
+                data.damage_relations.forEach((element: any) => {
+                    noDamageFrom.push(element.no_damage_from.name);
+
+
+
+                });
+                const noDamageTo: string[] = [];
+                data.damage_relations.forEach((element: any) => {
+                    noDamageTo.push(element.no_damage_to.name);
+                });
+
+                const damageRelations = new DamageRelations(doubleDamageFrom, doubleDamageTo, halfDamageFrom, halfDamageTo, noDamageFrom, noDamageTo)
+                resolve(damageRelations);
+
+            })
+        })
+
+    }
+}

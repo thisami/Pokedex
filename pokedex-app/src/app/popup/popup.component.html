@@ -1,7 +1,9 @@
-<h1 mat-dialog-title>Stärke gegen Typen</h1>
+<h1 mat-dialog-title>Type stats:</h1>
+<div mat-dialog-content *ngIf="isDataLoaded">
 
-<!--da kommt die Graphik rein-->
-<div mat-dialog-content>
+    <div>Hallo hier solls erstmal hin: {{damageRelation.doubleDamageFrom}}</div>
+    <!--da kommt die Graphik rein-->
+
     <!--Apex Chart Start:-->
     <div style="text-align:center">
         <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis"
@@ -9,10 +11,16 @@
     </div>
     <!--Apex Chart Ende:-->
 
+
+    <!--Apex Chart Start:-->
+    <div style="text-align:center">
+        <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis"
+            [title]="chartOptions.titleTwo"></apx-chart>
+    </div>
+    <!--Apex Chart Ende:-->
+
 </div>
 
 
 
-<div mat-dialog-actions>
-    <button mat-button [mat-dialog-close] cdkFocusInitial>Ok</button>
-</div>
+<div mat-dialog-actions><button mat-button mat-dialog-close>close</button></div>

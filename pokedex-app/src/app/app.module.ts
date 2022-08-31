@@ -12,6 +12,7 @@ import { PopupComponent } from './popup/popup.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgApexchartsModule } from 'ng-apexcharts';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +21,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
   ],
 
   imports: [
+
     NgApexchartsModule,
     MatDialogModule,
     FlexLayoutModule,
