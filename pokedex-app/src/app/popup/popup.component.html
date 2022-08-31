@@ -2,7 +2,12 @@
 
 <!--da kommt die Graphik rein-->
 <div mat-dialog-content>
-    <p>What's your favorite animal?</p>
+    <!--Apex Chart Start:-->
+    <div style="text-align:center">
+        <apx-chart [series]="chartOptions.series" [chart]="chartOptions.chart" [xaxis]="chartOptions.xaxis"
+            [title]="chartOptions.title"></apx-chart>
+    </div>
+    <!--Apex Chart Ende:-->
 
 </div>
 
