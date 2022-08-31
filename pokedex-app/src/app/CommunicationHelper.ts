@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { GenerationInformation } from "src/Entities/GenerationInformation";
 import { Pokemon } from "src/Entities/Pokemon";
+import { PokemonInformation } from "src/Entities/PokemonInformation";
 
 export class CommunicationHelper {
     public getGeneration(id: number, http: HttpClient): Promise<Pokemon[]> {
@@ -23,9 +24,9 @@ export class CommunicationHelper {
                 pokemonInGeneration.forEach((pokemonFromApi: any) => {
                     const pokemonNameInUppercase = pokemonFromApi.name.charAt(0).toUpperCase() + pokemonFromApi.name.slice(1)
 
-                    this.getId(pokemonFromApi.url, http).then((id: number) => {
-                        this.getImage(id, http).then((imageString: string) => {
-                            const newPokemon = new Pokemon(id, pokemonNameInUppercase, pokemonFromApi.url, imageString);
+                    this.getInformation(pokemonFromApi.url, http).then((pokeInfo: PokemonInformation) => {
+                        this.getImage(pokeInfo.pokeId, http).then((imageString: string) => {
+                            const newPokemon = new Pokemon(pokeInfo.pokeId, pokemonNameInUppercase, pokemonFromApi.url, imageString, pokeInfo.pokeTypes, pokeInfo.pokemonTypeInUppercase, pokeInfo.pokeTyp);
                             pokemonFromGeneration.push(newPokemon);
 
                             imageReceived = imageReceived + 1;
@@ -39,13 +40,28 @@ export class CommunicationHelper {
         })
     }
 
-    private getId(url: string, http: HttpClient): Promise<number> {
+    private getInformation(url: string, http: HttpClient): Promise<PokemonInformation> {
         return new Promise((resolve, reject) => {
             http.get<any>(url).subscribe((data: any) => {
-                resolve(data.id);
+                http.get<any>(`https://pokeapi.co/api/v2/pokemon/${data.id}/`).subscribe((data: any) => {
+                    const typeForPokemon: string[] = [];
+                    data.types.forEach((element: any) => {
+                        typeForPokemon.push(element.type.name);
+
+
+
+                    });
+                    const type: string = typeForPokemon.join(", ")
+
+                    const pokemonTypeInUppercase = type.charAt(0).toUpperCase() + type.slice(1)
+                    const specificInformation = new PokemonInformation(data.id, typeForPokemon, type, pokemonTypeInUppercase)
+                    resolve(specificInformation);
+                })
             })
         })
     }
+
+
 
     private getImage(id: number, http: HttpClient): Promise<string> {
         //1) anhand der URL einen weiteren API-Call machen -> Dort steht die korrekte ID des Pokemon
@@ -57,3 +73,4 @@ export class CommunicationHelper {
         })
     }
 }
+

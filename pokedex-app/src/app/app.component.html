@@ -2,8 +2,8 @@
 
   <mat-toolbar color="primary">
 
-    <button mat-icon-button aria-label="Example icon button with a vertical three dot icon" [matMenuTriggerFor]="menu">
-      <mat-icon>more_vert</mat-icon>
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
     </button>
 
     <span> Pokedex</span>
@@ -19,6 +19,7 @@
     </mat-menu>
   </mat-toolbar>
 
+
   <div class="cardContainer">
 
     <mat-card class="example-card" *ngFor="let pokemon of pokemon">
@@ -31,7 +32,7 @@
       <br>
       <mat-card-content>
         <p>
-          {{pokemon.name}}
+          Type: {{pokemon.pokeTyp}}
         </p>
       </mat-card-content>
       <mat-card-actions>
