@@ -31,19 +31,24 @@ export class PopupComponent implements OnInit {
     this.chartOptions = {
       series: [
         {
-          name: "My-series",
-          data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+          name: "x Damage to",//deals half/double/normal damage to
+          data: [0.5, 1, 1.5, 2]
+        },
+        {
+          name: "x Damage from",
+          data: [0.5, 1, 1.5, 2, 1.5, 1, 2, 0, 1.5, 2, 1]//half/double/normal damage from
         }
       ],
       chart: {
-        height: 350,
+        height: 300,
+        width: 700,
         type: "bar"
       },
       title: {
-        text: "My First Angular Chart"
+        text: "My First Angular Chart" //was anständiges hinschreiben
       },
       xaxis: {
-        categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep"]
+        categories: ["Ground", "Water", "Grass", "Ice", "Poison", "Rock", "Steel", "Fire", "Electric", "Bug", "Flying"]
       }
     };
 

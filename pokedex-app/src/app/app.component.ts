@@ -17,8 +17,6 @@ import { PopupComponent } from './popup/popup.component';
 export class AppComponent {
 
 
-
-
   title = 'pokedex';
 
   public pokemon: Pokemon[] = [];
