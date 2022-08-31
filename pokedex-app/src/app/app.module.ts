@@ -9,14 +9,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { PopupComponent } from './popup/popup.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
     AppComponent,
+
     PopupComponent
   ],
 
   imports: [
+    NgApexchartsModule,
+    MatDialogModule,
     FlexLayoutModule,
     MatCardModule,
     HttpClientModule,
@@ -27,8 +32,9 @@ import { PopupComponent } from './popup/popup.component';
     BrowserAnimationsModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 
+  entryComponents: [PopupComponent]
 
 })
 

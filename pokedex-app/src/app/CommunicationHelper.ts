@@ -26,7 +26,7 @@ export class CommunicationHelper {
 
                     this.getInformation(pokemonFromApi.url, http).then((pokeInfo: PokemonInformation) => {
                         this.getImage(pokeInfo.pokeId, http).then((imageString: string) => {
-                            const newPokemon = new Pokemon(pokeInfo.pokeId, pokemonNameInUppercase, pokemonFromApi.url, imageString, pokeInfo.pokeTypes, pokeInfo.pokemonTypeInUppercase, pokeInfo.pokeTyp);
+                            const newPokemon = new Pokemon(pokeInfo.pokeId, pokemonNameInUppercase, pokemonFromApi.url, imageString, pokeInfo.pokeTypes, pokeInfo.pokeTypes);
                             pokemonFromGeneration.push(newPokemon);
 
                             imageReceived = imageReceived + 1;
@@ -51,10 +51,8 @@ export class CommunicationHelper {
 
 
                     });
-                    const type: string = typeForPokemon.join(", ")
 
-                    const pokemonTypeInUppercase = type.charAt(0).toUpperCase() + type.slice(1)
-                    const specificInformation = new PokemonInformation(data.id, typeForPokemon, type, pokemonTypeInUppercase)
+                    const specificInformation = new PokemonInformation(data.id, typeForPokemon)
                     resolve(specificInformation);
                 })
             })
